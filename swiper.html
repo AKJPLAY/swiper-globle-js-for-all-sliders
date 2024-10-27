@@ -1,0 +1,66 @@
+<!--CDN-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer="defer"></script>
+
+<smart-slider class="swiper swiper-container">
+  <div class="section-content swiper-wrapper">
+    <div class="swiper-slide">
+    </div>
+    <div class="swiper-slide">
+    </div>
+    <div class="swiper-slide">
+    </div>
+  </div>
+  <div class="swiper-pagination swiper-pagination"></div>
+  <div class="swiper-button-prev swiper-button-prev"></div>
+  <div class="swiper-button-next swiper-button-next"></div>
+  <div class="swiper-scrollbar swiper-scrollbar"></div>
+  <script type="application/json" class="swiper-config">
+        {
+            "loop": true,
+            "slidesPerView": 1,
+            "spaceBetween": 10,
+            "navigation": {
+                "enabled" : false,
+                "nextEl": ".swiper-button-next",
+                "prevEl": ".swiper-button-prev"
+            },
+            "pagination": {
+                "enabled" : true,
+                "el": ".swiper-pagination"
+            },
+            "scrollbar": {
+                "enabled" : false,
+                "el": ".swiper-scrollbar"
+            }, 
+            "breakpoints": {
+                "750": {
+                    "navigation": {
+                        "enabled": true
+                    },
+                    "pagination": {
+                        "enabled" : false
+                    },
+                    "scrollbar": {
+                        "enabled" : false
+                    },
+                    "slidesPerView": 3,
+                    "spaceBetween": 20
+                },
+                "1200": {
+                    "navigation": {
+                        "enabled": true
+                    },
+                    "pagination": {
+                        "enabled" : false
+                    },
+                    "scrollbar": {
+                        "enabled" : false
+                    },
+                    "slidesPerView": 4,
+                    "spaceBetween": 40
+                }
+            }
+        }
+    </script>
+</smart-slider>
