@@ -1,0 +1,470 @@
+{%- assign section_unique_class = section.id -%}
+
+<div class="section-background">
+    <div class="section-wrapper page-width">
+        <div class="section-header">
+    
+        </div>
+        <div class="slider-container">
+            <smart-slider class="swiper swiper-container">
+                <div class="section-content swiper-wrapper">
+                    {% for block in section.blocks %}
+                        <div class="swiper-slide" {{ block.shopify_attributes }}>
+                            <div class="background-container">
+                                {% if block.settings.image %}
+                                    {% render 'image', image: block.settings.image, class: 'background' %}
+                                {% endif %}
+                                {% if block.settings.image_mobile %}
+                                    {% render 'image', image: block.settings.image_mobile, class: 'background-mobile' %}
+                                {% endif %}
+                                <div class="overlay-custom">
+
+                                </div>
+                            </div>
+                            <div class="content {{ block.settings.content }} {{ block.settings.content_items }}">
+                                <p class="caption">
+                                    {{ block.settings.caption_text }}
+                                </p>
+                                <h3 class="title">
+                                    {{ block.settings.title_text }}
+                                </h3>
+                                <p class="description">
+                                    {{ block.settings.description_text }}
+                                </p>
+                                <div class="button-container-custom">
+                                    <a href="{{ block.settings.button_url_1 }}" class="btn btn--primary">
+                                        <div class="btn__text">
+                                            {{ block.settings.button_text_1 }}
+                                            <svg class="icon icon--cart" aria-hidden="true" focusable="false" role="presentation" width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: relative; top: 3px;">
+                                                <path d="M1 1.5H3L3.4 3.5M5 11.5H15L19 3.5H3.4M5 11.5L3.4 3.5M5 11.5L2.70711 13.7929C2.07714 14.4229 2.52331 15.5 3.41421 15.5H15M15 15.5C13.8954 15.5 13 16.3954 13 17.5C13 18.6046 13.8954 19.5 15 19.5C16.1046 19.5 17 18.6046 17 17.5C17 16.3954 16.1046 15.5 15 15.5ZM7 17.5C7 18.6046 6.10457 19.5 5 19.5C3.89543 19.5 3 18.6046 3 17.5C3 16.3954 3.89543 15.5 5 15.5C6.10457 15.5 7 16.3954 7 17.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </div>
+                                    </a>
+                                    <a href="{{ block.settings.button_url_2 }}" class="btn btn--secondary">
+                                        <div class="btn__text">
+                                            {{ block.settings.button_text_2 }}
+                                        </div>
+                                    </a>
+                                </div>
+                                <p class="text-bottom">
+                                    Discover our trustScore & customer reviews
+                                </p>
+                                <div class="review">
+                                    <span class="no">
+                                        4.9/5
+                                    </span>
+                                    <span class="icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.7208 1.92192C9.12344 0.692693 10.8766 0.692694 11.2792 1.92192L12.7178 6.31388C12.8979 6.8636 13.4143 7.2358 13.997 7.2358H18.6524C19.9554 7.2358 20.4971 8.88971 19.443 9.64941L15.6767 12.3638C15.2053 12.7035 15.008 13.3058 15.1881 13.8555L16.6267 18.2474C17.0293 19.4767 15.611 20.4988 14.5569 19.7391L10.7906 17.0248C10.3192 16.685 9.68083 16.685 9.20941 17.0248L5.44311 19.7391C4.389 20.4988 2.97069 19.4767 3.37333 18.2474L4.81193 13.8555C4.99199 13.3058 4.79473 12.7035 4.32332 12.3638L0.557018 9.64941C-0.497098 8.88971 0.0446463 7.2358 1.3476 7.2358H6.00301C6.58571 7.2358 7.10214 6.8636 7.28221 6.31388L8.7208 1.92192Z" fill="currentColor"/>
+                                        </svg>
+                                    </span>
+                                    <span class="count">
+                                        (18,921)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-pagination swiper-pagination-{{ section_unique_class }}"></div>
+                <div class="swiper-button-prev swiper-button-prev-{{ section_unique_class }}"></div>
+                <div class="swiper-button-next swiper-button-next-{{ section_unique_class }}"></div>
+                <div class="swiper-scrollbar swiper-scrollbar-{{ section_unique_class }}"></div>
+                <script type="application/json" class="swiper-config">
+                    {
+                        "loop": true,
+                        {% case section.settings.effect %}
+                            {% when 'flip' or 'fade' or 'cube' or 'cards' %}
+                                "slidesPerView": 1,
+                            {% else %}
+                                "slidesPerView": {{ section.settings.columns_m }},        
+                        {% endcase %}
+                        {% if section.settings.effect != 'none' %}
+                            {% case section.settings.effect %}
+                                    {% when 'fade' %}
+                                "effect": "fade",
+                                {% when 'coverflow' %}
+                                    "effect" : "coverflow",
+                                    "coverflow": {
+                                        "rotate": 50,
+                                        "stretch": 0,
+                                        "depth": 100,
+                                        "modifier": 1,
+                                        "scale": 1,
+                                        "slideShadows" : true
+                                    },
+                                {% when 'flip' %}
+                                    "effect" : "flip",
+                                    "flip": {
+                                        "limitRotation": true,
+                                        "slideShadows": true
+                                    },
+                                {% when 'cube' %}
+                                    "effect" : "cube",
+                                    "cube": {
+                                        "shadow": true,
+                                        "shadowOffset": 20,
+                                        "shadowScale": "0.94",
+                                        "slideShadows": true
+                                    },
+                                {% when 'cards' %}
+                                    "effect" : "cards",
+                                    "cube": {
+                                        "perSlideOffset": 8,
+                                        "perSlideRotate": 2,
+                                        "rotate": true,
+                                        "slideShadows": true
+                                    },
+                            {% endcase %}
+                        {% endif %}
+                        "spaceBetween": 0,
+                        "navigation": {
+                            "enabled" : {{ section.settings.mobile_arrow }},
+                            "nextEl": ".swiper-button-next-{{ section_unique_class }}",
+                            "prevEl": ".swiper-button-prev-{{ section_unique_class }}"
+                        },
+                        "pagination": {
+                            "enabled" : {{ section.settings.mobile_pagination }},
+                            "clickable": true,
+                            "el": ".swiper-pagination-{{ section_unique_class }}"
+                        },
+                        "scrollbar": {
+                            "enabled" : {{ section.settings.mobile_scrollbar }},
+                            "el": ".swiper-scrollbar-{{ section_unique_class }}"
+                        }, 
+                        "breakpoints": {
+                                "750": {
+                                    "navigation": {
+                                        "enabled": {{ section.settings.tablet_arrow }}
+                                    },
+                                    "pagination": {
+                                        "enabled" : {{ section.settings.tablet_pagination }}
+                                    },
+                                    "scrollbar": {
+                                        "enabled" : {{ section.settings.tablet_scrollbar }}
+                                    },
+                                    {% case section.settings.effect %}
+                                        {% when 'flip' or 'fade' or 'cube' or 'cards' %}
+                                            "slidesPerView": 1,
+                                            
+                                        {% else %}
+                                            "slidesPerView": {{ section.settings.columns_t }},        
+                                    {% endcase %}
+                                    "spaceBetween": 0
+                                },
+                                "1200": {
+                                    "navigation": {
+                                        "enabled": {{ section.settings.desktop_arrow }}
+                                    },
+                                    "pagination": {
+                                        "enabled" : {{ section.settings.desktop_pagination }}
+                                    },
+                                    "scrollbar": {
+                                        "enabled" : {{ section.settings.desktop_scrollbar }}
+                                    },
+                                    {% case section.settings.effect %}
+                                        {% when 'flip' or 'fade' or 'cube' or 'cards' %}
+                                            "slidesPerView": 1,
+                                            
+                                        {% else %}
+                                            "slidesPerView": {{ section.settings.columns }},        
+                                    {% endcase %}
+                                    "spaceBetween": 0
+                                }
+                        }
+                    }
+                </script>
+            </smart-slider>
+        </div>
+        <div class="section-footer">
+    
+        </div>
+    </div>
+</div>
+{% schema %}
+    {
+        "name": "Hero Section",
+        "tag": "section",
+        "class": "hero-slider-section",
+        "presets": [
+            {
+                "name":"Hero Section"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "Slide",
+                "type": "image_picker",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image_mobile",
+                        "label": "Image Mobile"
+                    },
+                    {
+                        "type": "text",
+                        "id": "caption_text",
+                        "label": "Caption Text",
+                        "default": "#1 Podiatrist Recommended"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title_text",
+                        "label": "Title Text",
+                        "default": "Your path to healthy freedom"
+                    },
+                    {
+                        "type": "textarea",
+                        "id": "description_text",
+                        "label": "Description Text",
+                        "default": "Step into a world of unmatched comfort and support, designed to keep you going on every adventure."
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text",
+                        "label": "Bottom Text",
+                        "default": "Discover our trustScore & customer reviews"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text_1",
+                        "label": "Button 1 Text",
+                        "default": "Shop Now"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_url_1",
+                        "label": "Button 1 URL"
+                    },
+                    {
+                        "type": "text",
+                        "id": "button_text_2",
+                        "label": "Button 1 Text",
+                        "default": "View Categories"
+                    },
+                    {
+                        "type": "url",
+                        "id": "button_url_2",
+                        "label": "Button 1 URL"
+                    },
+                    {
+                        "type": "select",
+                        "id": "content",
+                        "label": "Content Alignment",
+                        "options": [
+                            { "value": "top-left", "label": "Top Left " },
+                            { "value": "top-center", "label": "Top Center " },
+                            { "value": "top-right", "label": "Top Right " },
+                            { "value": "middel-left", "label": "Middel Left " },
+                            { "value": "middel-center", "label": "Middel Center " },
+                            { "value": "middel-right", "label": "Middel Right " },
+                            { "value": "bottom-left", "label": "Bottom Left " },
+                            { "value": "bottom-center", "label": "Bottom Center " },
+                            { "value": "bottom-right", "label": "Bottom Right " }
+                        ],
+                        "default": "middel-left"
+                    },
+                    {
+                        "type": "select",
+                        "id": "content_items",
+                        "label": "Content Items Alignment",
+                        "options": [
+                            { "value": "content-left", "label": "Content Left" },
+                            { "value": "content-center", "label": "Content Center" },
+                            { "value": "content-right", "label": "Content Right" }
+                        ],
+                        "default": "content-left"
+                    },
+                    {
+                        "type": "header",
+                        "content": "Color Settings"
+                    }
+                ]
+            }
+        ],
+        "settings": [
+            {
+                "type": "header",
+                "content": "Section Settings"
+            },
+            {
+                "type": "header",
+                "content": "Columns"
+            },
+            {
+                "type": "range",
+                "id": "columns",
+                "label": "Desktop",
+                "unit": "cls",
+                "min": 1,
+                "max": 1,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "range",
+                "id": "columns_t",
+                "label": "Tablet",
+                "unit": "cls",
+                "min": 1,
+                "max": 1,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "range",
+                "id": "columns_m",
+                "label": "Mobile",
+                "unit": "cls",
+                "min": 1,
+                "max": 1,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "header",
+                "content": "Slider"
+            },
+            {
+                "type": "header",
+                "content": "Swipe Slide"
+            },
+            {
+                "type": "range",
+                "id": "swipre_slide",
+                "label": "Desktop",
+                "unit": "cls",
+                "min": 1,
+                "max": 1,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "range",
+                "id": "swipre_slide_t",
+                "label": "Tablet",
+                "unit": "cls",
+                "min": 1,
+                "max": 1,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "range",
+                "id": "swipre_slide_m",
+                "label": "Mobile",
+                "unit": "cls",
+                "min": 1,
+                "max": 1,
+                "step": 1,
+                "default": 1
+            },
+            {
+                "type": "header",
+                "content": "Effect"
+            },
+            {
+                "type": "select",
+                "id": "effect",
+                "label": "Type",
+                "options": [
+                    {
+                        "value": "none",
+                        "label": "None"
+                    },
+                    {
+                        "value": "fade",
+                        "label": "Fade (Single Slide Mode)"
+                    },
+                    {
+                        "value": "coverflow",
+                        "label": "Coverflow Effect"
+                    },
+                    {
+                        "value": "flip",
+                        "label": "Flip (Single Slide Mode)"
+                    },
+                    {
+                        "value": "cube",
+                        "label": "Cube (Single Slide Mode)"
+                    },
+                    {
+                        "value": "cards",
+                        "label": "Cards (Single Slide Mode)"
+                    }
+                ]
+            },
+            {
+                "type": "header",
+                "content": "Slider Arrow"
+            },
+            {
+                "type": "checkbox",
+                "id": "desktop_arrow",
+                "label": "Desktop",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "tablet_arrow",
+                "label": "Tablet",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "mobile_arrow",
+                "label": "Mobile",
+                "default": false
+            },
+            {
+                "type": "header",
+                "content": "Slider Pagination"
+            },
+            {
+                "type": "checkbox",
+                "id": "desktop_pagination",
+                "label": "Desktop",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "tablet_pagination",
+                "label": "Tablet",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "mobile_pagination",
+                "label": "Mobile",
+                "default": false
+            },
+            {
+                "type": "header",
+                "content": "Slider Scrollbar"
+            },
+            {
+                "type": "checkbox",
+                "id": "desktop_scrollbar",
+                "label": "Desktop",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "tablet_scrollbar",
+                "label": "Tablet",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "mobile_scrollbar",
+                "label": "Mobile",
+                "default": false
+            }
+        ]
+    }
+{% endschema %}
